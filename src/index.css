@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar for better appearance if needed, otherwise browser default */
+/* For Webkit browsers (Chrome, Safari, Edge, Opera) */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* For IE and Edge (older versions) */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+}
+
+/* For Firefox */
+.scrollbar-hide {
+    scrollbar-width: none;
+}
