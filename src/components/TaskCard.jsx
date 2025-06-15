@@ -1,4 +1,5 @@
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+// TaskCard.jsx
 import { useState, useEffect } from "react";
 import { Pencil, Trash2, Check, X } from "lucide-react";
 
@@ -24,13 +25,14 @@ export default function TaskCard({ task, index, onDelete, onEdit }) {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`p-3 rounded-lg flex justify-between items-center gap-2 transition-all duration-200 shadow-md select-none 
-            ${snapshot.isDragging ? "bg-blue-100 dark:bg-blue-800 scale-105" : "bg-white dark:bg-gray-800"}`}
+          className={`flex items-center justify-between gap-2 bg-gray-100 dark:bg-gray-800 p-2 rounded-lg shadow-sm transition-all duration-300 ${
+            snapshot.isDragging ? "bg-blue-100 dark:bg-blue-900 scale-105" : ""
+          }`}
         >
           {isEditing ? (
             <>
               <input
-                className="flex-1 border rounded px-2 py-1 text-sm dark:bg-gray-700 dark:text-white"
+                className="flex-1 px-2 py-1 border rounded text-sm dark:bg-gray-700 dark:text-white"
                 value={newText}
                 onChange={(e) => setNewText(e.target.value)}
                 onKeyDown={(e) => {
@@ -41,38 +43,32 @@ export default function TaskCard({ task, index, onDelete, onEdit }) {
                   }
                 }}
               />
-              <button onClick={handleEdit} className="text-green-600 dark:text-green-400">
-                <Check size={16} />
+              <button onClick={handleEdit} title="Save">
+                <Check className="w-4 h-4 text-green-600" />
               </button>
               <button
                 onClick={() => {
                   setIsEditing(false);
                   setNewText(task.text);
                 }}
-                className="text-gray-500 dark:text-gray-300"
+                title="Cancel"
               >
-                <X size={16} />
+                <X className="w-4 h-4 text-gray-500" />
               </button>
             </>
           ) : (
             <>
               <span
-                className="flex-1 cursor-pointer text-sm text-gray-800 dark:text-gray-100"
                 onDoubleClick={() => setIsEditing(true)}
+                className="flex-1 text-sm cursor-pointer break-words dark:text-white"
               >
                 {task.text}
               </span>
-              <button
-                onClick={() => setIsEditing(true)}
-                className="text-blue-500 hover:text-blue-700 dark:text-blue-300"
-              >
-                <Pencil size={16} />
+              <button onClick={() => setIsEditing(true)} title="Edit">
+                <Pencil className="w-4 h-4 text-blue-500 hover:text-blue-700" />
               </button>
-              <button
-                onClick={onDelete}
-                className="text-red-500 hover:text-red-700 dark:text-red-400"
-              >
-                <Trash2 size={16} />
+              <button onClick={onDelete} title="Delete">
+                <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
               </button>
             </>
           )}
@@ -81,3 +77,4 @@ export default function TaskCard({ task, index, onDelete, onEdit }) {
     </Draggable>
   );
 }
+

@@ -1,12 +1,24 @@
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { useEffect, useState } from "react";
 import Column from "./Column";
-import { motion } from "framer-motion";
+import { RotateCcw } from "lucide-react";
 
 const initialData = [
-  { id: "todo", title: "To Do", tasks: [] },
-  { id: "inprogress", title: "In Progress", tasks: [] },
-  { id: "done", title: "Done", tasks: [] },
+  {
+    id: "todo",
+    title: "To Do",
+    tasks: [],
+  },
+  {
+    id: "inprogress",
+    title: "In Progress",
+    tasks: [],
+  },
+  {
+    id: "done",
+    title: "Done",
+    tasks: [],
+  },
 ];
 
 export default function Board() {
@@ -72,9 +84,7 @@ export default function Board() {
     if (source.droppableId === destination.droppableId) {
       sourceCol.tasks.splice(destination.index, 0, movedTask);
       setColumns((prev) =>
-        prev.map((col) =>
-          col.id === sourceCol.id ? { ...sourceCol } : col
-        )
+        prev.map((col) => (col.id === sourceCol.id ? { ...sourceCol } : col))
       );
     } else {
       destCol.tasks.splice(destination.index, 0, movedTask);
@@ -90,27 +100,37 @@ export default function Board() {
     }
   };
 
+  const resetBoard = () => {
+    setColumns(initialData);
+    localStorage.removeItem("kanban-data");
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <motion.div
-        className="flex gap-6 px-4 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4 }}
-      >
-        {columns.map((column) => (
-          <Column
-            key={column.id}
-            columnId={column.id}
-            title={column.title}
-            tasks={column.tasks}
-            onAdd={addTask}
-            onDelete={deleteTask}
-            onEdit={editTask}
-          />
-        ))}
-      </motion.div>
-    </DragDropContext>
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-4 px-2">
+        <h1 className="text-2xl md:text-3xl font-bold">Task Board</h1>
+        <button
+          onClick={resetBoard}
+          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow"
+        >
+          <RotateCcw size={16} /> Reset
+        </button>
+      </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-x-auto">
+          {columns.map((column) => (
+            <Column
+              key={column.id}
+              columnId={column.id}
+              title={column.title}
+              tasks={column.tasks}
+              onAdd={addTask}
+              onDelete={deleteTask}
+              onEdit={editTask}
+            />
+          ))}
+        </div>
+      </DragDropContext>
+    </div>
   );
 }
-
