@@ -1,24 +1,27 @@
-// Column.jsx
 import { useState } from "react";
 import TaskCard from "./TaskCard";
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import { PlusCircle } from "lucide-react";
+
 export default function Column({ columnId, title, tasks = [], onAdd, onDelete, onEdit }) {
   const [input, setInput] = useState("");
 
   const handleAdd = () => {
     if (!input.trim()) return;
-    onAdd(columnId, input); // use columnId, not column.id
+    onAdd(columnId, input);
     setInput("");
   };
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-80">
-      <h2 className="text-xl font-semibold mb-3">{title}</h2>
+    <div className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-4 w-full max-w-sm transition duration-300">
+      <h2 className="text-xl font-bold mb-4 text-gray-800 dark:text-white text-center">
+        {title}
+      </h2>
 
       <Droppable droppableId={columnId}>
         {(provided) => (
           <div
-            className="space-y-2 mb-4 min-h-[50px]"
+            className="space-y-3 mb-4 min-h-[60px] transition-all"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -36,18 +39,19 @@ export default function Column({ columnId, title, tasks = [], onAdd, onDelete, o
         )}
       </Droppable>
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center mt-2">
         <input
-          className="border flex-1 p-1 rounded"
+          className="border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-sm rounded px-2 py-1 flex-1 text-gray-900 dark:text-white"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="New task..."
         />
         <button
           onClick={handleAdd}
-          className="bg-blue-500 text-white px-2 rounded"
+          className="flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded shadow-md transition duration-200"
         >
-          Add
+          <PlusCircle className="w-4 h-4" />
+          <span className="text-sm">Add</span>
         </button>
       </div>
     </div>

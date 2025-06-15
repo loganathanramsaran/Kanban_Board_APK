@@ -1,6 +1,8 @@
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { useEffect, useState } from "react";
 import Column from "./Column";
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import { motion } from "framer-motion";
+
 const initialData = [
   { id: "todo", title: "To Do", tasks: [] },
   { id: "inprogress", title: "In Progress", tasks: [] },
@@ -18,8 +20,8 @@ export default function Board() {
   }, [columns]);
 
   const addTask = (columnId, text) => {
-    setColumns(prev =>
-      prev.map(col =>
+    setColumns((prev) =>
+      prev.map((col) =>
         col.id === columnId
           ? {
               ...col,
@@ -31,12 +33,12 @@ export default function Board() {
   };
 
   const deleteTask = (columnId, taskId) => {
-    setColumns(prev =>
-      prev.map(col =>
+    setColumns((prev) =>
+      prev.map((col) =>
         col.id === columnId
           ? {
               ...col,
-              tasks: col.tasks.filter(task => task.id !== taskId),
+              tasks: col.tasks.filter((task) => task.id !== taskId),
             }
           : col
       )
@@ -44,12 +46,12 @@ export default function Board() {
   };
 
   const editTask = (columnId, taskId, newText) => {
-    setColumns(prev =>
-      prev.map(col =>
+    setColumns((prev) =>
+      prev.map((col) =>
         col.id === columnId
           ? {
               ...col,
-              tasks: col.tasks.map(task =>
+              tasks: col.tasks.map((task) =>
                 task.id === taskId ? { ...task, text: newText } : task
               ),
             }
@@ -58,24 +60,26 @@ export default function Board() {
     );
   };
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
     if (!destination) return;
 
-    const sourceCol = columns.find(col => col.id === source.droppableId);
-    const destCol = columns.find(col => col.id === destination.droppableId);
+    const sourceCol = columns.find((col) => col.id === source.droppableId);
+    const destCol = columns.find((col) => col.id === destination.droppableId);
 
     const [movedTask] = sourceCol.tasks.splice(source.index, 1);
 
     if (source.droppableId === destination.droppableId) {
       sourceCol.tasks.splice(destination.index, 0, movedTask);
-      setColumns(prev =>
-        prev.map(col => (col.id === sourceCol.id ? { ...sourceCol } : col))
+      setColumns((prev) =>
+        prev.map((col) =>
+          col.id === sourceCol.id ? { ...sourceCol } : col
+        )
       );
     } else {
       destCol.tasks.splice(destination.index, 0, movedTask);
-      setColumns(prev =>
-        prev.map(col =>
+      setColumns((prev) =>
+        prev.map((col) =>
           col.id === sourceCol.id
             ? { ...sourceCol }
             : col.id === destCol.id
@@ -88,8 +92,13 @@ export default function Board() {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className="flex gap-4 p-4 overflow-x-auto">
-        {columns.map(column => (
+      <motion.div
+        className="flex gap-6 px-4 py-6 overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-transparent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        {columns.map((column) => (
           <Column
             key={column.id}
             columnId={column.id}
@@ -100,7 +109,8 @@ export default function Board() {
             onEdit={editTask}
           />
         ))}
-      </div>
+      </motion.div>
     </DragDropContext>
   );
 }
+
