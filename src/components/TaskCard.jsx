@@ -1,8 +1,17 @@
 import { useState, useEffect } from "react";
-import { Pencil, Trash2, Check, X } from "lucide-react";
-import { Draggable } from '@hello-pangea/dnd';
+import { Pencil, Trash2, Check, X, Star, StarOff, RotateCcw } from "lucide-react";
+import { Draggable } from "@hello-pangea/dnd";
 
-export default function TaskCard({ task, index, onDelete, onEdit }) {
+export default function TaskCard({
+  task,
+  index,
+  onDelete,
+  onEdit,
+  onToggleFavorite,
+  onTrash,
+  onRestore,
+  isTrashView,
+}) {
   const [isEditing, setIsEditing] = useState(false);
   const [newText, setNewText] = useState(task.text);
 
@@ -25,9 +34,10 @@ export default function TaskCard({ task, index, onDelete, onEdit }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           className={`flex items-center justify-between gap-2 p-2 rounded-lg shadow-md border transition-all duration-300 
-            ${snapshot.isDragging
-              ? "bg-emerald-100 dark:bg-emerald-800 scale-[1.03]"
-              : "bg-white dark:bg-gray-800 border-emerald-200 dark:border-gray-700"
+            ${
+              snapshot.isDragging
+                ? "bg-emerald-100 dark:bg-emerald-800 scale-[1.03]"
+                : "bg-white dark:bg-gray-800 border-emerald-200 dark:border-gray-700"
             }`}
         >
           {isEditing ? (
@@ -65,12 +75,40 @@ export default function TaskCard({ task, index, onDelete, onEdit }) {
               >
                 {task.text}
               </span>
-              <button onClick={() => setIsEditing(true)} title="Edit">
-                <Pencil className="w-4 h-4 text-blue-500 hover:text-blue-700" />
-              </button>
-              <button onClick={onDelete} title="Delete">
-                <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
-              </button>
+
+              {/* Show favorite button only if not in trash */}
+              {!isTrashView && onToggleFavorite && (
+                <button
+                  onClick={onToggleFavorite}
+                  title={task.favorite ? "Unfavorite" : "Favorite"}
+                >
+                  {task.favorite ? (
+                    <Star className="w-4 h-4 text-yellow-400 hover:text-yellow-500" />
+                  ) : (
+                    <StarOff className="w-4 h-4 text-gray-400 hover:text-yellow-500" />
+                  )}
+                </button>
+              )}
+
+              {isTrashView ? (
+                <>
+                  <button onClick={onRestore} title="Restore">
+                    <RotateCcw className="w-4 h-4 text-green-600 hover:text-green-700" />
+                  </button>
+                  <button onClick={onDelete} title="Delete Permanently">
+                    <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button onClick={onTrash} title="Move to Trash">
+                    <Trash2 className="w-4 h-4 text-red-500 hover:text-red-700" />
+                  </button>
+                  <button onClick={() => setIsEditing(true)} title="Edit">
+                    <Pencil className="w-4 h-4 text-blue-500 hover:text-blue-700" />
+                  </button>
+                </>
+              )}
             </>
           )}
         </div>
