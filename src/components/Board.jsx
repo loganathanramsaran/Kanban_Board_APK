@@ -1,4 +1,4 @@
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import { DragDropContext } from '@hello-pangea/dnd'
 import { useEffect, useState } from "react";
 import Column from "./Column";
 import { RotateCcw } from "lucide-react";
@@ -78,7 +78,6 @@ export default function Board() {
 
     const sourceCol = columns.find((col) => col.id === source.droppableId);
     const destCol = columns.find((col) => col.id === destination.droppableId);
-
     const [movedTask] = sourceCol.tasks.splice(source.index, 1);
 
     if (source.droppableId === destination.droppableId) {
@@ -106,18 +105,19 @@ export default function Board() {
   };
 
   return (
-    <div className="p-4">
+    <div className="Board-main p-4">
       <div className="flex justify-between items-center mb-4 px-2">
-        <h1 className="text-2xl md:text-3xl font-bold">Task Board</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-green-800 dark:text-green-200">Task Board</h1>
         <button
           onClick={resetBoard}
-          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow"
+          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded 
+          shadow transition duration-200"
         >
           <RotateCcw size={16} /> Reset
         </button>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-x-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {columns.map((column) => (
             <Column
               key={column.id}
