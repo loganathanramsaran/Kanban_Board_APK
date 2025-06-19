@@ -26,7 +26,7 @@ export default function Favorites({ data, onToggleFavorite }) {
 
   return (
     <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">⭐ Favorite Tasks</h2>
+      <h2 className="text-xl text-center font-semibold mb-4">⭐ Favorite Tasks</h2>
       <div className="space-y-3">
         {favorites.map((task) => (
           <div
