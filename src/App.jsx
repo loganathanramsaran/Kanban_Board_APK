@@ -131,7 +131,7 @@ function App() {
 
       <div className="flex">
         <Sidebar onSelect={handleSidebarSelect} open={sidebarOpen} setOpen={setSidebarOpen} />
-        <main className="w-full min-h-screen">{renderView()}</main>
+        <main className="w-full mx-auto min-h-screen">{renderView()}</main>
       </div>
 
       <footer className="bg-emerald-400 text-center dark:bg-gray-900 dark:text-gray-400 py-4 border-t border-gray-200 dark:border-gray-700">
