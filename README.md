@@ -29,7 +29,7 @@ A sleek, responsive Kanban board built with **React**, **Tailwind CSS**, and **r
 ## 📦 Installation
 
 ```bash
-git clone [(https://github.com/loganathanramsaran/Kanban_Board_APK).git]
+git clone https://github.com/loganathanramsaran/Kanban_Board_APK.git
 cd kanban-board
 npm install
 npm run dev  # or npm start
@@ -54,4 +54,4 @@ kanban-board/
 ```
 | Light Mode                             | Dark Mode                            |
 | -------------------------------------- | ------------------------------------ |
-| ![light-mode](./screenshots/light.png) | ![dark-mode](./screenshots/dark.png) |
+| ![light-mode](/screenshots/light.png) | ![dark-mode](/screenshots/dark.png) |
