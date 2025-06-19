@@ -25,8 +25,8 @@ export default function Trash({ data, onRestore, onDelete }) {
   }
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">🗑️ Trashed Tasks</h2>
+    <div className="p-6 min-h-screen pt-6">
+      <h2 className="text-xl text-center font-semibold mb-4">🗑️ Trashed Tasks</h2>
       <div className="space-y-3">
         {trash.map((task) => (
           <div
@@ -35,7 +35,7 @@ export default function Trash({ data, onRestore, onDelete }) {
           >
             <div>
               <p className="font-medium text-gray-800 dark:text-white">
-                {task.text}
+                {task.title}
               </p>
               <small className="text-xs text-gray-500">
                 From: {task.columnTitle}
@@ -43,7 +43,6 @@ export default function Trash({ data, onRestore, onDelete }) {
             </div>
 
             <div className="flex gap-2">
-              {/* Restore Button */}
               <button
                 onClick={() => onRestore(task.columnId, task.id)}
                 title="Restore Task"
@@ -52,7 +51,6 @@ export default function Trash({ data, onRestore, onDelete }) {
                 <RotateCcw />
               </button>
 
-              {/* Permanent Delete Button */}
               <button
                 onClick={() => onDelete(task.columnId, task.id)}
                 title="Delete Permanently"

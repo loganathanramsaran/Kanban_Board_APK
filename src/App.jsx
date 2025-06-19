@@ -36,23 +36,30 @@ function App() {
     setSidebarOpen(false); // Auto-close sidebar on mobile
   };
 
-  const updateTask = (taskId, updater) => {
+  const toggleFavorite = (columnId, taskId) => {
+    setColumns((prev) =>
+      prev.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId ? { ...task, favorite: !task.favorite } : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const moveToTrash = (taskId) => {
     setColumns((prev) =>
       prev.map((col) => ({
         ...col,
         tasks: col.tasks.map((task) =>
-          task.id === taskId ? updater(task) : task
+          task.id === taskId ? { ...task, trashed: true } : task
         ),
       }))
     );
-  };
-
-  const toggleFavorite = (taskId) => {
-    updateTask(taskId, (task) => ({ ...task, favorite: !task.favorite }));
-  };
-
-  const moveToTrash = (taskId) => {
-    updateTask(taskId, (task) => ({ ...task, trashed: true }));
   };
 
   const restoreTask = (columnId, taskId) => {
@@ -70,7 +77,7 @@ function App() {
     );
   };
 
-  const PermanentDelete = (columnId, taskId) => {
+  const permanentDelete = (columnId, taskId) => {
     setColumns((prev) =>
       prev.map((col) =>
         col.id === columnId
@@ -88,13 +95,7 @@ function App() {
       return <Favorites data={columns} onToggleFavorite={toggleFavorite} />;
     }
     if (view === "trash") {
-      return (
-        <Trash
-          data={columns}
-          onRestore={restoreTask}
-          onDelete={PermanentDelete}
-        />
-      );
+      return <Trash data={columns} onRestore={restoreTask} onDelete={permanentDelete} />;
     }
     return (
       <Board
@@ -108,7 +109,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-mint-light dark:bg-gray-900 transition-colors duration-300">
-      <header className="flex justify-between items-center px-4 py-4 shadow-md bg-emerald-400 dark:bg-gray-800">
+      <header className="flex justify-between items-center px-4 py-3 shadow-md bg-emerald-400 dark:bg-gray-800">
         <div className="flex items-center gap-2 text-gray-800 dark:text-white">
           <LayoutDashboard className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
           <h1 className="text-2xl font-bold">Kanban Board</h1>
@@ -116,7 +117,7 @@ function App() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setDark((prev) => !prev)}
-            className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+            className="p-2 rounded-full hover:bg-emerald-200 dark:hover:bg-gray-700 transition"
             title="Toggle Dark Mode"
           >
             {dark ? (
@@ -129,12 +130,8 @@ function App() {
       </header>
 
       <div className="flex">
-        <Sidebar
-          onSelect={handleSidebarSelect}
-          open={sidebarOpen}
-          setOpen={setSidebarOpen}
-        />
-        <main className="min-h-[480px] p-6 w-full">{renderView()}</main>
+        <Sidebar onSelect={handleSidebarSelect} open={sidebarOpen} setOpen={setSidebarOpen} />
+        <main className="w-full min-h-screen">{renderView()}</main>
       </div>
 
       <footer className="bg-emerald-400 text-center dark:bg-gray-900 dark:text-gray-400 py-4 border-t border-gray-200 dark:border-gray-700">

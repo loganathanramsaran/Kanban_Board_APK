@@ -1,9 +1,11 @@
+// Board.jsx
 import { DragDropContext } from "@hello-pangea/dnd";
 import Column from "./Column";
 import { RotateCcw } from "lucide-react";
+import TaskForm from "./TaskForm";
 
 export default function Board({ columns, setColumns }) {
-  const addTask = (columnId, text) => {
+  const addTask = (columnId, data) => {
     setColumns((prev) =>
       prev.map((col) =>
         col.id === columnId
@@ -13,7 +15,10 @@ export default function Board({ columns, setColumns }) {
                 ...col.tasks,
                 {
                   id: Date.now().toString(),
-                  text,
+                  title: data.title,
+                  description: data.description || "",
+                  tags: data.tags || [],
+                  priority: data.priority || "low",
                   favorite: false,
                   trashed: false,
                 },
@@ -37,14 +42,14 @@ export default function Board({ columns, setColumns }) {
     );
   };
 
-  const editTask = (columnId, taskId, newText) => {
+  const editTask = (columnId, taskId, updatedFields) => {
     setColumns((prev) =>
       prev.map((col) =>
         col.id === columnId
           ? {
               ...col,
               tasks: col.tasks.map((task) =>
-                task.id === taskId ? { ...task, text: newText } : task
+                task.id === taskId ? { ...task, ...updatedFields } : task
               ),
             }
           : col
@@ -77,6 +82,21 @@ export default function Board({ columns, setColumns }) {
               ...col,
               tasks: col.tasks.map((task) =>
                 task.id === taskId ? { ...task, trashed: true } : task
+              ),
+            }
+          : col
+      )
+    );
+  };
+
+  const handleRestoreTask = (columnId, taskId) => {
+    setColumns((prev) =>
+      prev.map((col) =>
+        col.id === columnId
+          ? {
+              ...col,
+              tasks: col.tasks.map((task) =>
+                task.id === taskId ? { ...task, trashed: false } : task
               ),
             }
           : col
@@ -119,17 +139,21 @@ export default function Board({ columns, setColumns }) {
 
   return (
     <div className="Board-main p-4">
-      <div className="flex justify-between items-center mb-4 px-2">
-        <h1 className="text-2xl md:text-3xl font-bold text-green-800 dark:text-green-200">
+      <div className="flex items-center mb-6 px-2">
+        <h1 className="text-2xl flex justify-center w-full md:text-3xl font-bold text-green-800 dark:text-green-200">
           Task Board
-          </h1>
+        </h1>
         <button
           onClick={resetBoard}
-          className="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow transition duration-200"
+          className="flex justify-end items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow transition duration-200"
         >
           <RotateCcw size={16} /> Reset
         </button>
       </div>
+
+      {/* 🚀 New Task Form */}
+      <TaskForm columns={columns} onAddTask={addTask} />
+
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {columns.map((column) => (
@@ -137,16 +161,13 @@ export default function Board({ columns, setColumns }) {
               key={column.id}
               columnId={column.id}
               title={column.title}
-              tasks={column.tasks.filter(task => !task.trashed)} // hide trashed tasks
+              tasks={column.tasks.filter((task) => !task.trashed)}
               onAdd={addTask}
               onDelete={deleteTask}
               onEdit={editTask}
-              onToggleFavorite={(colId, taskId) =>
-                handleToggleFavorite(colId, taskId)
-              }
-              onTrash={(colId, taskId) =>
-                handleTrashTask(colId, taskId)
-              }
+              onToggleFavorite={handleToggleFavorite}
+              onTrash={handleTrashTask}
+              onRestore={handleRestoreTask}
             />
           ))}
         </div>
