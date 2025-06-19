@@ -118,7 +118,7 @@ export default function TaskCard({
               <div className="flex justify-between items-start">
                 <h3
                   onDoubleClick={() => setIsEditing(true)}
-                  className="text-lg font-medium text-green-600 dark:text-gray-100 break-words flex-1 cursor-pointer"
+                  className=" font-medium text-green-600 dark:text-gray-100 break-words flex-1 cursor-pointer"
                 >
                   {task.title}
                 </h3>

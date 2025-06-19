@@ -1,5 +1,6 @@
-import { Trash2, RotateCcw } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Trash2, RotateCcw } from "lucide-react";
+import emptyTrashIcon from '../assets/trash.png';
 
 export default function Trash({ data, onRestore, onDelete }) {
   const [trash, setTrash] = useState([]);
@@ -18,9 +19,13 @@ export default function Trash({ data, onRestore, onDelete }) {
 
   if (trash.length === 0) {
     return (
+      <div>
       <p className="text-center mt-10 text-gray-600 dark:text-gray-400">
-        Trash is empty.
-      </p>
+          Trash is empty.
+          <img src={emptyTrashIcon} alt="Empty trash icon" className="mx-auto mt-4 w-[35%] mix-blend-multiply" /> 
+        </p>
+
+      </div>
     );
   }
 

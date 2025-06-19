@@ -24,10 +24,10 @@ export default function TaskForm({ columns, onAddTask }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className=" bg-emerald-100 dark:bg-gray-800 p-3 w-3/4 max-md:w-full mx-auto rounded-lg shadow mb-6 border border-gray-300 dark:border-gray-700"
+      className=" bg-emerald-100 dark:bg-gray-800 p-3 w-3/4 max-md:w-full mx-auto rounded-lg shadow mb-6  border-gray-300 dark:border-gray-700"
     >
       <h2 className="text-lg font-semibold text-center text-gray-800 dark:text-gray-200 mb-3">Create New Task</h2>
-      <div className="space-y-2 flex flex-col items-center">
+      <div className="gap-3 flex flex-col items-center">
         <input
           className="w-3/4 p-1 border rounded bg-white dark:bg-gray-900 text-gray-800 dark:text-white"
           placeholder="Task title"

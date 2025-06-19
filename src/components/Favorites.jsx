@@ -1,5 +1,6 @@
 import { StarOff } from "lucide-react";
 import { useState, useEffect } from "react";
+import emptyTrashIcon from '../assets/trash.png';
 
 export default function Favorites({ data, onToggleFavorite }) {
   const [favorites, setFavorites] = useState([]);
@@ -20,6 +21,7 @@ export default function Favorites({ data, onToggleFavorite }) {
     return (
       <p className="text-center mt-10 text-gray-600 dark:text-gray-400">
         No favorite tasks found.
+          <img src={emptyTrashIcon} alt="Empty trash icon" className="mx-auto mt-4 w-[35%] mix-blend-multiply" /> 
       </p>
     );
   }
