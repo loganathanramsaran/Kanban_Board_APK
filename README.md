@@ -1,14 +1,57 @@
-# React + Vite
+# 🧠 Kanban Task Management App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, responsive Kanban board built with **React**, **Tailwind CSS**, and **react-beautiful-dnd**. Manage your tasks visually across columns, mark favorites, trash unwanted tasks, and enjoy light/dark themes!
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 📋 Create, edit, and delete tasks
+- 📌 Mark tasks as **Favorites**
+- 🗑️ Move tasks to **Trash**, restore or permanently delete them
+- 🌗 Toggle between **Light/Dark mode**
+- 🔀 Drag-and-drop tasks between columns
+- 💾 Data persistence with **localStorage**
+- 📱 Fully responsive & mobile-friendly
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# Kanban_Board" 
-"# Kanban_Board" 
+---
+
+## 🛠️ Tech Stack
+
+- **React** with Hooks
+- **Tailwind CSS**
+- **react-beautiful-dnd**
+- **lucide-react** icons
+- LocalStorage for persistence
+
+---
+
+## 📦 Installation
+
+```bash
+git clone https://github.com/loganathanramsaran/Kanban_Board_APK.git
+cd kanban-board
+npm install
+npm run dev  # or npm start
+```
+---
+##📁 Folder Structure
+```
+kanban-board/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── Board.jsx
+│   │   ├── Column.jsx
+│   │   ├── TaskForm.jsx
+│   │   ├── Favorites.jsx
+│   │   ├── Trash.jsx
+│   │   └── Sidebar.jsx
+│   ├── App.jsx
+│   └── main.jsx
+├── tailwind.config.js
+└── index.html
+```
+| Light Mode                             | Dark Mode                            |
+| -------------------------------------- | ------------------------------------ |
+| ![light-mode](/screenshots/light.PNG) | ![dark-mode](./screenshots/dark.PNG) |
