@@ -139,7 +139,7 @@ export default function Board({ columns, setColumns }) {
 
   return (
     <div className="Board-main my-4 mr-2">
-      <div className="flex items-center mb-6 ">
+      <div className="flex items-center mb-4">
         <h1 className="text-2xl flex justify-center w-full md:text-3xl font-bold text-green-800 dark:text-green-200">
           Task Board
         </h1>
@@ -151,7 +151,7 @@ export default function Board({ columns, setColumns }) {
         </button>
       </div>
 
-      <div className="mr-8 ml-2">
+      <div className="ml-2">
       <TaskForm columns={columns} onAddTask={addTask} />
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
