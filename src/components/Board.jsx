@@ -138,8 +138,8 @@ export default function Board({ columns, setColumns }) {
   };
 
   return (
-    <div className="Board-main p-4">
-      <div className="flex items-center mb-6 px-2">
+    <div className="Board-main my-4 mr-2">
+      <div className="flex items-center mb-6 ">
         <h1 className="text-2xl flex justify-center w-full md:text-3xl font-bold text-green-800 dark:text-green-200">
           Task Board
         </h1>
@@ -147,13 +147,12 @@ export default function Board({ columns, setColumns }) {
           onClick={resetBoard}
           className="flex justify-end items-center gap-1 bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow transition duration-200"
         >
-          <RotateCcw size={16} /> Reset
+          <RotateCcw size={14} /> Reset
         </button>
       </div>
 
-      {/* 🚀 New Task Form */}
+      <div className="mr-8 ml-2">
       <TaskForm columns={columns} onAddTask={addTask} />
-
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {columns.map((column) => (
@@ -172,6 +171,7 @@ export default function Board({ columns, setColumns }) {
           ))}
         </div>
       </DragDropContext>
+      </div>
     </div>
   );
 }

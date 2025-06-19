@@ -13,7 +13,7 @@ export default function Column({
   isTrashView = false,
 }) {
   return (
-    <div className="bg-emerald-50 dark:bg-gray-700 shadow-xl rounded-2xl p-4 w-full max-w-sm transition duration-300 border border-mint-200">
+    <div className="bg-emerald-50 dark:bg-gray-700 shadow-xl rounded-2xl p-3 w-full transition duration-300 border border-mint-200">
       <h2 className="text-xl font-semibold mb-4 text-emerald-800 dark:text-emerald-200 text-center tracking-wide">
         {title}
       </h2>

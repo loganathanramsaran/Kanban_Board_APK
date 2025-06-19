@@ -25,11 +25,11 @@ export default function Sidebar({ onSelect }) {
   };
 
   return (
-    <div className="sidebar border-r-2 ">
+    <div className="sidebar">
       <button
         onClick={toggleSidebar}
-        className=" z-50 bg-emerald-600 hover:bg-emerald-700 text-white p-2 m-3 rounded-lg 
-        shadow-md transition lg:hidden "
+        className=" z-50 bg-emerald-600 hover:bg-emerald-700 text-white p-2 rounded-lg 
+        shadow-md transition lg:hidden ml-2 mt-4"
         aria-label="Toggle sidebar"
       >
         {open ? <X size={20} /> : <Menu size={20} />}

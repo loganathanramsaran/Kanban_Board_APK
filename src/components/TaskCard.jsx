@@ -59,7 +59,7 @@ export default function TaskCard({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`flex flex-col w-3/4 mx-auto gap-1 py-1 px-3 rounded-lg shadow-md border transition-all duration-300 
+          className={`flex flex-col w-3/4 mx-auto gap-1 py-1 px-2 rounded-lg shadow-md border transition-all duration-300 
             ${
               snapshot.isDragging
                 ? "bg-emerald-100 dark:bg-emerald-800 scale-[1.03]"
