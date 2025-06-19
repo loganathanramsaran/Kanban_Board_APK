@@ -37,7 +37,7 @@ npm run dev  # or npm start
 ---
 ##📁 Folder Structure
 ```
-kanban-board/
+kanban-app/
 ├── public/
 ├── src/
 │   ├── components/
