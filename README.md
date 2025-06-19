@@ -37,7 +37,7 @@ npm run dev  # or npm start
 ---
 ##📁 Folder Structure
 ```
-kanban-board/
+kanban-app/
 ├── public/
 ├── src/
 │   ├── components/
@@ -54,4 +54,4 @@ kanban-board/
 ```
 | Light Mode                             | Dark Mode                            |
 | -------------------------------------- | ------------------------------------ |
-| ![light-mode](/screenshots/light.PNG) | ![dark-mode](./screenshots/dark.PNG) |
+| ![light-mode](/screenshots/light.PNG) | ![dark-mode](/screenshots/dark.PNG) |
