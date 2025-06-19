@@ -1,14 +1,10 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-"# Kanban_Board" 
-"# Kanban_Board" 
+Kanban Board ApplicationA simple and intuitive Kanban board application built with React and styled using Tailwind CSS, designed to help you organize your tasks and workflows efficiently.✨ FeaturesTask Management: Create, move, and manage tasks across different columns (e.g., To Do, In Progress, Done).Drag-and-Drop: Easily reorder tasks within columns and move them between columns using drag-and-drop functionality.Favorites: Mark important tasks as favorites for quick access.Trash Functionality: Move tasks to a "Trash" section instead of permanent deletion, allowing for restoration.Permanent Deletion: Option to permanently delete tasks from the Trash.Persistence: Your board data (columns and tasks) is automatically saved in your browser's local storage, so your progress is retained even after closing the browser.Dark Mode Toggle: Switch between light and dark themes for a comfortable viewing experience.Responsive Design: Optimized for various screen sizes, from mobile to desktop.Fixed Header: The application header stays at the top of the screen for easy navigation.🚀 Technologies UsedReact: A JavaScript library for building user interfaces.Tailwind CSS: A utility-first CSS framework for rapidly building custom designs.Lucide React: A collection of beautiful, pixel-perfect icons for React applications.Local Storage: Used for client-side data persistence.📦 InstallationTo get a local copy up and running, follow these simple steps:Clone the repository:git clone https://github.com/your-username/your-repo-name.git
+# Replace 'your-username/your-repo-name.git' with your actual repository URL
+Navigate to the project directory:cd your-repo-name
+Install dependencies:npm install
+# or
+yarn install
+Start the development server:npm start
+# or
+yarn start
+This will open the application in your browser at http://localhost:3000 (or another port if 3000 is in use).💡 UsageAdd Tasks: Click on the "Add Task" button (or similar UI, depending on Board component implementation) within a column to add a new task.Move Tasks: Drag and drop tasks to rearrange them within a column or move them to a different column.Mark as Favorite: Click the star icon (or similar) on a task to mark it as a favorite.Move to Trash: Click the trash icon on a task to send it to the trash.Restore/Delete from Trash: Go to the "Trash" view from the sidebar to restore tasks or permanently delete them.Toggle Theme: Use the sun/moon icon in the header to switch between light and dark modes.🤝 ContributingContributions are welcome! If you have suggestions for improvements or find any bugs, please feel free to:Fork the repository.Create a new branch (git checkout -b feature/AmazingFeature).Make your changes.Commit your changes (git commit -m 'Add some AmazingFeature').Push to the branch (git push origin feature/AmazingFeature).Open a Pull Request.📄 LicenseDistributed under the MIT License. See LICENSE for more information. (You would need to create a LICENSE file in your repository if you choose this.)Made with ❤️ by [Your Name/Team Name]
